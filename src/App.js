@@ -1,28 +1,48 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import Spotify from "spotify-web-api-js";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      authenticated: false,
+      following: [],
+      currentDevice: ""
+    };
+  }
+
+  async componentDidMount() {
+    if (window.location.hash) {
+      // Remove the "#"
+      const queryString = window.location.hash.substring(1);
+      // Parse the access_token out
+      const accessToken = new URLSearchParams(queryString).get("access_token");
+      this.spotifyClient = new Spotify();
+      this.spotifyClient.setAccessToken(accessToken);
+
+      const { devices } = await this.spotifyClient.getMyDevices();
+      // const devices = Object.keys(devicesResp).map(key => devicesResp[key]);
+      this.setState({
+        authenticated: true,
+        currentDevice: devices[0].id
+      });
+    }
+  }
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          <p>this also renders</p>
-        </header>
-      </div>
-    );
+    if (!this.state.authenticated) {
+      return (
+        <a
+          href={`https://accounts.spotify.com/authorize/?client_id=468f8ece2880441da7f5c9531877c6ac&response_type=token&redirect_uri=${window
+            .location.origin +
+            window.location
+              .pathname}&scope=user-read-playback-state user-modify-playback-state user-top-read user-read-private`}
+        >
+          Login with Spotify
+        </a>
+      );
+    }
+    return "You are logged in!";
   }
 }
 
