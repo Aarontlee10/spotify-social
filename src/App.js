@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Spotify from "spotify-web-api-js";
+import SongCard from "./SongCard.jsx";
 
 class App extends Component {
   constructor(props) {
@@ -16,9 +17,9 @@ class App extends Component {
       // Remove the "#"
       const queryString = window.location.hash.substring(1);
       // Parse the access_token out
-      const accessToken = new URLSearchParams(queryString).get("access_token");
+      this.accessToken = new URLSearchParams(queryString).get("access_token");
       this.spotifyClient = new Spotify();
-      this.spotifyClient.setAccessToken(accessToken);
+      this.spotifyClient.setAccessToken(this.accessToken);
 
       const { devices } = await this.spotifyClient.getMyDevices();
       // const devices = Object.keys(devicesResp).map(key => devicesResp[key]);
@@ -42,7 +43,8 @@ class App extends Component {
         </a>
       );
     }
-    return "You are logged in!";
+    
+    return <SongCard Spotify={this.spotifyClient} token={this.accessToken}/>;
   }
 }
 
