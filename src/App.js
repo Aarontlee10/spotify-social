@@ -4,6 +4,7 @@ import SongCard from "./SongCard.jsx";
 import ArtistCard from "./ArtistCard.jsx";
 import * as firebase from "firebase/app";
 import "firebase/firestore";
+import ArtistCards from "./ArtistCards.jsx";
 
 class App extends Component {
   constructor(props) {
@@ -58,10 +59,11 @@ class App extends Component {
     }
     if (this.state.artists.length > 0) {
       return (
-        <ArtistCard
-          Spotify={this.spotifyClient}
-          artistId={this.state.artists[0].id}
-        />
+        // <ArtistCard
+        //   Spotify={this.spotifyClient}
+        //   artistId={this.state.artists[0].id}
+        // />
+        <ArtistCards Spotify={this.spotifyClient} artists={this.state.artists} />
       );
     }
     this.getTopArtists();
