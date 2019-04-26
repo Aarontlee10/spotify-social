@@ -5,22 +5,39 @@ class ArtistCard extends React.Component {
     super(props);
     this.artistId = this.props.artistId;
     this.Client = this.props.Spotify;
-    this.artistTopTracks = [];
+    this.state = {
+      topTracks: [],
+      artistName: ""
+    }
   }
 
-  async getArtistTracks() {
-    await this.Client.getArtistTopTracks(this.ArtistID).then(data => {
-      this.artistTopTracks = data.items;
+  getArtistTracks = async () => {
+    await this.Client.getArtistTopTracks(this.artistId, "us").then(data => {
+      const trackNames = [];
+      data.tracks.map((track) => {trackNames.push(track.name)});
+      this.setState({topTracks: trackNames});
+    })
+  }
+
+  getArtistName = async () => {
+    await this.Client.getArtist(this.artistId, "us").then(data => {
+      this.setState({artistName: data.name});
     })
   }
 
   render() {
-    this.getArtistTracks();
-    if (this.artistTopTracks.length >= 0) {
+    if (this.state.topTracks.length > 0) {
+      console.log(this.state.topTracks);
       return (
-        <div>{this.artistTopTracks[0]}</div>
+        <div>
+          <div>{this.state.artistName}</div>
+          <div>{this.state.topTracks}</div>
+        </div>
       )
     }
+    this.getArtistName();
+    this.getArtistTracks();
+    return <div></div>
   }
 }
 

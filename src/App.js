@@ -56,9 +56,7 @@ class App extends Component {
         </a>
       );
     }
-    this.getTopArtists();
     if (this.state.artists.length > 0) {
-      console.log("here");
       return (
         <ArtistCard
           Spotify={this.spotifyClient}
@@ -66,7 +64,8 @@ class App extends Component {
         />
       );
     }
-    return <div />;
+    this.getTopArtists();
+    return <div/>
   }
 }
 
