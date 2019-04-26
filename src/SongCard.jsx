@@ -5,20 +5,20 @@ class SongCard extends React.Component {
     super(props);
     this.state = {
       songs: []
-    }
+    };
   }
-  async setTopTracks(songCard) {
+
+  setTopTracks = async () => {
     const options = {
       limit: 50
-    }
+    };
     const spotifyClient = this.props.Spotify;
 
-    await spotifyClient.getMyTopTracks(options).then((data) => {
-      songCard.state.songs = data.items;
-      console.log(songCard.state.songs)
+    await spotifyClient.getMyTopTracks(options).then(data => {
+      this.setState({ songs: data.items });
+      // console.log(this.state.songs)
     });
-  }
-
+  };
 
   render() {
     // var spotifyClient = this.props.Spotify;
@@ -31,16 +31,10 @@ class SongCard extends React.Component {
     //   console.log(data.items);
     // });
 
-
-    this.setTopTracks(this);
-    return (
-      <div>
-        {console.log(this.state.songs)}
-      </div>
-    )
+    this.setTopTracks();
+    console.log(this.state.songs);
+    return <div>{}</div>;
   }
-
-
 }
 
 export default SongCard;
