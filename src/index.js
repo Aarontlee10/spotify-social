@@ -5,6 +5,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import * as firebase from "firebase/app";
 import "firebase/firestore";
+import "bootstrap/dist/css/bootstrap.css";
 
 var config = {
   apiKey: "AIzaSyDAB8Bxa4x7zjXgKgEILA4q6IJfS01BjQY",
