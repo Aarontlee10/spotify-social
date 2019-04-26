@@ -58,6 +58,7 @@ class App extends Component {
     }
     this.getTopArtists();
     if (this.state.artists.length > 0) {
+      console.log("here");
       return (
         <ArtistCard
           Spotify={this.spotifyClient}
