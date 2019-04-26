@@ -17,7 +17,6 @@ class ArtistCards extends React.Component {
 
   render() {
     this.getArtistCards();
-    console.log(this.artistCards);
     return (
       <div>{this.artistCards}</div>
     )
