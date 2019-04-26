@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Spotify from "spotify-web-api-js";
 import SongCard from "./SongCard.jsx";
+import ArtistCard from "./ArtistCard.jsx";
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 
@@ -10,9 +11,20 @@ class App extends Component {
     this.state = {
       authenticated: false,
       following: [],
-      currentDevice: ""
+      currentDevice: "",
+      artists: []
     };
   }
+
+  getTopArtists = async () => {
+    const options = {
+      limit: 10
+    };
+
+    await this.spotifyClient.getMyTopArtists(options).then(data => {
+      this.setState({ artists: data.items });
+    });
+  };
 
   async componentDidMount() {
     if (window.location.hash) {
@@ -44,7 +56,16 @@ class App extends Component {
         </a>
       );
     }
-    return <SongCard Spotify={this.spotifyClient} token={this.accessToken} />;
+    this.getTopArtists();
+    if (this.state.artists.length > 0) {
+      return (
+        <ArtistCard
+          Spotify={this.spotifyClient}
+          artistId={this.state.artists[0].id}
+        />
+      );
+    }
+    return <div />;
   }
 }
 
