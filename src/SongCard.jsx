@@ -32,7 +32,7 @@ class SongCard extends React.Component {
     // });
 
     this.setTopTracks();
-    console.log(this.state.songs);
+    // console.log(this.state.songs);
     return <div>{}</div>;
   }
 }

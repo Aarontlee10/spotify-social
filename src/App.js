@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Spotify from "spotify-web-api-js";
 import SongCard from "./SongCard.jsx";
+import * as firebase from "firebase/app";
+import "firebase/firestore";
 
 class App extends Component {
   constructor(props) {
@@ -24,8 +26,7 @@ class App extends Component {
       const { devices } = await this.spotifyClient.getMyDevices();
       // const devices = Object.keys(devicesResp).map(key => devicesResp[key]);
       this.setState({
-        authenticated: true,
-        currentDevice: devices[0].id
+        authenticated: true
       });
     }
   }
@@ -43,8 +44,8 @@ class App extends Component {
         </a>
       );
     }
-    
-    return <SongCard Spotify={this.spotifyClient} token={this.accessToken}/>;
+
+    return <SongCard Spotify={this.spotifyClient} token={this.accessToken} />;
   }
 }
 
