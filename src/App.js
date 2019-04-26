@@ -44,7 +44,6 @@ class App extends Component {
         </a>
       );
     }
-
     return <SongCard Spotify={this.spotifyClient} token={this.accessToken} />;
   }
 }
