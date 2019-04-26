@@ -25,7 +25,6 @@ class App extends Component {
       // const devices = Object.keys(devicesResp).map(key => devicesResp[key]);
       this.setState({
         authenticated: true,
-        currentDevice: devices[0].id
       });
     }
   }
@@ -43,7 +42,7 @@ class App extends Component {
         </a>
       );
     }
-    
+
     return <SongCard Spotify={this.spotifyClient} token={this.accessToken}/>;
   }
 }
