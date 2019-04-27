@@ -63,11 +63,14 @@ class App extends Component {
         //   Spotify={this.spotifyClient}
         //   artistId={this.state.artists[0].id}
         // />
-        <ArtistCards Spotify={this.spotifyClient} artists={this.state.artists} />
+        <ArtistCards
+          Spotify={this.spotifyClient}
+          artists={this.state.artists}
+        />
       );
     }
     this.getTopArtists();
-    return <div/>
+    return <div />;
   }
 }
 

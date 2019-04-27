@@ -17,19 +17,35 @@ class ArtistCard extends React.Component {
     this.artistId = this.props.artistId;
     this.Client = this.props.Spotify;
     this.state = {
-      topTracks: [],
+      topTrackIds: [],
+      topTrackNames: [],
       artistName: "",
-      artistImg: ""
+      artistImg: "",
+      currentTrackId: ""
     };
   }
+
+  playSong = async trackId => {
+    if (this.state.currentTrackId != trackId) {
+      await this.Client.play({
+        uris: [`spotify:track:${trackId}`]
+      });
+      this.setState({ currentTrackId: trackId });
+    } else {
+      await this.Client.pause();
+      this.setState({ currentTrackId: "" });
+    }
+  };
 
   getArtistTracks = async () => {
     await this.Client.getArtistTopTracks(this.artistId, "us").then(data => {
       const trackNames = [];
+      const trackIds = [];
       data.tracks.map(track => {
         trackNames.push(track.name);
+        trackIds.push(track.id);
       });
-      this.setState({ topTracks: trackNames });
+      this.setState({ topTrackNames: trackNames, topTrackIds: trackIds });
     });
   };
 
@@ -40,8 +56,7 @@ class ArtistCard extends React.Component {
   };
 
   render() {
-    if (this.state.topTracks.length > 0) {
-      console.log(this.state.artistImg);
+    if (this.state.topTrackNames.length > 0) {
       return (
         <div>
           <Card>
@@ -61,20 +76,40 @@ class ArtistCard extends React.Component {
                 }}
               />
               <ListGroup>
-                <ListGroupItem tag="button" action>
-                  {this.state.topTracks[0]}
+                <ListGroupItem
+                  onClick={e => this.playSong(this.state.topTrackIds[0])}
+                  tag="button"
+                  action
+                >
+                  {this.state.topTrackNames[0]}
                 </ListGroupItem>
-                <ListGroupItem tag="button" action>
-                  {this.state.topTracks[1]}
+                <ListGroupItem
+                  onClick={e => this.playSong(this.state.topTrackIds[1])}
+                  tag="button"
+                  action
+                >
+                  {this.state.topTrackNames[1]}
                 </ListGroupItem>
-                <ListGroupItem tag="button" action>
-                  {this.state.topTracks[2]}
+                <ListGroupItem
+                  onClick={e => this.playSong(this.state.topTrackIds[2])}
+                  tag="button"
+                  action
+                >
+                  {this.state.topTrackNames[2]}
                 </ListGroupItem>
-                <ListGroupItem tag="button" action>
-                  {this.state.topTracks[3]}
+                <ListGroupItem
+                  onClick={e => this.playSong(this.state.topTrackIds[3])}
+                  tag="button"
+                  action
+                >
+                  {this.state.topTrackNames[3]}
                 </ListGroupItem>
-                <ListGroupItem tag="button" action>
-                  {this.state.topTracks[4]}
+                <ListGroupItem
+                  onClick={e => this.playSong(this.state.topTrackIds[4])}
+                  tag="button"
+                  action
+                >
+                  {this.state.topTrackNames[4]}
                 </ListGroupItem>
               </ListGroup>
             </CardBody>
