@@ -6,7 +6,9 @@ import {
   CardBody,
   CardTitle,
   CardSubtitle,
-  Button
+  Button,
+  ListGroup,
+  ListGroupItem
 } from "reactstrap";
 
 class ArtistCard extends React.Component {
@@ -33,7 +35,7 @@ class ArtistCard extends React.Component {
 
   getArtistName = async () => {
     await this.Client.getArtist(this.artistId, "us").then(data => {
-      this.setState({ artistName: data.name, artistImg: data.images[0].url});
+      this.setState({ artistName: data.name, artistImg: data.images[0].url });
     });
   };
 
@@ -43,15 +45,38 @@ class ArtistCard extends React.Component {
       return (
         <div>
           <Card>
-            <CardImg
-              src={this.state.artistImg}
-              alt={this.state.artistName}
-              style={{maxHeight: "10%", maxWidth: "10%"}}
-            />
             <CardBody>
-              <CardTitle>{this.state.artistName}</CardTitle>
-              <CardText>{this.state.topTracks}</CardText>
-              <Button>Play</Button>
+              <CardTitle style={{ textAlign: "left" }}>
+                {this.state.artistName}
+              </CardTitle>
+              <CardImg
+                src={this.state.artistImg}
+                alt={this.state.artistName}
+                style={{
+                  float: "left",
+                  marginTop: "50px",
+                  marginRight: "20px",
+                  maxHeight: "10%",
+                  maxWidth: "10%"
+                }}
+              />
+              <ListGroup>
+                <ListGroupItem tag="button" action>
+                  {this.state.topTracks[0]}
+                </ListGroupItem>
+                <ListGroupItem tag="button" action>
+                  {this.state.topTracks[1]}
+                </ListGroupItem>
+                <ListGroupItem tag="button" action>
+                  {this.state.topTracks[2]}
+                </ListGroupItem>
+                <ListGroupItem tag="button" action>
+                  {this.state.topTracks[3]}
+                </ListGroupItem>
+                <ListGroupItem tag="button" action>
+                  {this.state.topTracks[4]}
+                </ListGroupItem>
+              </ListGroup>
             </CardBody>
           </Card>
         </div>
