@@ -1,4 +1,5 @@
 import React from "react";
+import ArtistInfo from "./ArtistInfo.jsx";
 import {
   Card,
   CardImg,
@@ -21,7 +22,8 @@ class ArtistCard extends React.Component {
       topTrackNames: [],
       artistName: "",
       artistImg: "",
-      currentTrackId: ""
+      currentTrackId: "",
+      artistData: null
     };
   }
 
@@ -51,19 +53,29 @@ class ArtistCard extends React.Component {
 
   getArtistName = async () => {
     await this.Client.getArtist(this.artistId, "us").then(data => {
-      this.setState({ artistName: data.name, artistImg: data.images[0].url });
+      this.setState({
+        artistName: data.name,
+        artistImg: data.images[0].url,
+        artistData: data
+      });
     });
   };
 
   render() {
-    if (this.state.topTrackNames.length > 0) {
+    if (this.state.topTracks.length > 0 || this.state.artistData != null) {
+      this.artistInfo = (
+        <ArtistInfo
+          Spotify={this.Client}
+          artistId={this.artistId}
+          artistName={this.state.artistName}
+          artistData={this.state.artistData}
+        />
+      );
       return (
         <div>
           <Card>
             <CardBody>
-              <CardTitle style={{ textAlign: "left" }}>
-                {this.state.artistName}
-              </CardTitle>
+              {this.artistInfo}
               <CardImg
                 src={this.state.artistImg}
                 alt={this.state.artistName}
