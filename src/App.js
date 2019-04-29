@@ -33,7 +33,6 @@ class App extends Component {
     const options = {
       limit: 10
     };
-
     await this.spotifyClient.getMyTopArtists(options).then(data => {
       var artistIds = [];
       data.items.map(artist => artistIds.push(artist.id));
@@ -72,7 +71,7 @@ class App extends Component {
         </div>
       );
     }
-    if (this.state.artists.length > 0) {
+    else if (this.state.artists.length > 0) {
       return (
         // <ArtistCard
         //   Spotify={this.spotifyClient}
@@ -97,7 +96,7 @@ class App extends Component {
         </div>
       );
     }
-    if (this.state.searched === false) {
+    else if (this.state.searched === false) {
       this.getTopArtists();
     }
     return <div />;

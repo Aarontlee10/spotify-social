@@ -9,6 +9,7 @@ class ArtistCards extends React.Component {
   }
 
   async getArtistCards() {
+    this.artistCards = [];
     await this.props.artists.map(artist => {
       this.artistCards.push(
         <ArtistCard Spotify={this.props.Spotify} artistId={artist} />

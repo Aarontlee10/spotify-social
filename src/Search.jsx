@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./App.css";
 
 class Search extends Component {
   constructor(props) {
@@ -50,10 +51,11 @@ class Search extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <input
+          className="search"
           type="text"
           onChange={e => this.setState({ query: e.target.value })}
         />
-        <input type="submit" value="Search" />
+        <input className= "search" type="submit" value="Search" />
       </form>
     );
   }
