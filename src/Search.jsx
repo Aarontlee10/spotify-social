@@ -29,10 +29,10 @@ class Search extends Component {
     return artistIds;
   }
 
-  onSubmit = ev => {
+  onSubmit = async ev => {
     ev.preventDefault();
     if (this.state.query !== "") {
-      this.props.spotifyClient
+      await this.props.spotifyClient
         .search(this.state.query, ["artist", "track"], {
           market: "us",
           limit: 10

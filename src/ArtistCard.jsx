@@ -43,6 +43,9 @@ class ArtistCard extends React.Component {
 
   getArtistName = async () => {
     await this.Client.getArtist(this.artistId, "us").then(data => {
+      if (data.images.length === 0) {
+        data.images.push({url: ""});
+      }
       this.setState({
         artistName: data.name,
         artistImg: data.images[0].url,

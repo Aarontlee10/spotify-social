@@ -12,14 +12,18 @@ class App extends Component {
       authenticated: false,
       following: [],
       currentDevice: "",
-      artists: []
+      artists: [],
+      searched: false
     };
   }
 
   getSearchResults = results => {
+    this.setState({searched: true});
     if (results.length !== 0) {
-      this.setState({ artists: results });
+      this.setState({artists: []});
+      this.setState({ artists: results});
     } else {
+      this.setState({artists: [], searched: false});
       this.getTopArtists();
     }
   };
@@ -71,12 +75,14 @@ class App extends Component {
         //   artistId={this.state.artists[0].id}
         // />
         <div>
-          <Search
-            spotifyClient={this.spotifyClient}
-            passSearchResults={this.getSearchResults}
-          />
           <div className="userInfo">
             <UserInfo Spotify={this.spotifyClient} />
+          </div>
+          <div>
+            <Search
+              spotifyClient={this.spotifyClient}
+              passSearchResults={this.getSearchResults}
+            />
           </div>
           <div className="artistCards">
             <ArtistCards
@@ -87,7 +93,9 @@ class App extends Component {
         </div>
       );
     }
-    this.getTopArtists();
+    if (this.state.searched === false) {
+      this.getTopArtists();
+    }
     return <div />;
   }
 }

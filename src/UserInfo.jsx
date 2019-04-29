@@ -27,7 +27,6 @@ class UserInfo extends React.Component {
   render() {
     this.getUser();
     if (this.state.userData != null) {
-      console.log(this.state.userData);
       return (
         <div>
           <Button
