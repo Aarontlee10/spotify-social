@@ -1,6 +1,7 @@
 import React from "react";
 import ArtistInfo from "./ArtistInfo.jsx";
 import { Card, CardImg, CardBody, ListGroup, ListGroupItem } from "reactstrap";
+import "./App.css";
 
 class ArtistCard extends React.Component {
   constructor(props) {
@@ -66,10 +67,12 @@ class ArtistCard extends React.Component {
         />
       );
       return (
-        <div>
+        <div className="artistCard">
           <Card>
             <CardBody>
-              {this.artistInfo}
+              <div className="artistButton">
+                {this.artistInfo}
+              </div>
               <CardImg
                 src={this.state.artistImg}
                 alt={this.state.artistName}

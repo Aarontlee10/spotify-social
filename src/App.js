@@ -4,6 +4,7 @@ import ArtistCards from "./ArtistCards.jsx";
 import Search from "./Search.jsx";
 import UserInfo from "./UserInfo.jsx";
 import "./App.css";
+import { Button } from "reactstrap";
 
 class App extends Component {
   constructor(props) {
@@ -58,14 +59,17 @@ class App extends Component {
   render() {
     if (!this.state.authenticated) {
       return (
-        <a
-          href={`https://accounts.spotify.com/authorize/?client_id=468f8ece2880441da7f5c9531877c6ac&response_type=token&redirect_uri=${window
-            .location.origin +
-            window.location
-              .pathname}&scope=user-read-playback-state user-modify-playback-state user-top-read user-read-private`}
-        >
-          Login with Spotify
-        </a>
+        <div className="App-header">
+          <Button
+            href={`https://accounts.spotify.com/authorize/?client_id=468f8ece2880441da7f5c9531877c6ac&response_type=token&redirect_uri=${window
+              .location.origin +
+              window.location
+                .pathname}&scope=user-read-playback-state user-modify-playback-state user-top-read user-read-private`}
+            color="success"
+          >
+            Login with Spotify
+          </Button>
+        </div>
       );
     }
     if (this.state.artists.length > 0) {
@@ -78,7 +82,7 @@ class App extends Component {
           <div className="userInfo">
             <UserInfo Spotify={this.spotifyClient} />
           </div>
-          <div>
+          <div className="search">
             <Search
               spotifyClient={this.spotifyClient}
               passSearchResults={this.getSearchResults}
