@@ -62,13 +62,14 @@ class ArtistCard extends React.Component {
   };
 
   render() {
-    if (this.state.topTrackNames.length > 0 || this.state.artistData != null) {
+    if (this.state.topTrackNames.length > 0 && this.state.artistData != null) {
       this.artistInfo = (
         <ArtistInfo
           Spotify={this.Client}
           artistId={this.artistId}
           artistName={this.state.artistName}
           artistData={this.state.artistData}
+          artistImg={this.state.artistImg}
         />
       );
       return (

@@ -1,11 +1,11 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, CardImg } from 'reactstrap';
 
 class ArtistInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      model: false
+      modal: false
     }
     this.toggle = this.toggle.bind(this);
   }
@@ -23,6 +23,15 @@ class ArtistInfo extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>{this.props.artistName}</ModalHeader>
           <ModalBody>
+          <CardImg
+            style={{
+              maxHeight: "20%",
+              maxWidth: "20%",
+              float: "left",
+              marginRight: "15px"
+            }}
+            src={this.props.artistImg}
+          />
             <div>Followers: {this.props.artistData.followers.total}</div>
             <div>Genre: {this.props.artistData.genres[0]}</div>
             <div>Popularity: {this.props.artistData.popularity}/100</div>

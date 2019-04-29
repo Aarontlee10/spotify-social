@@ -1,5 +1,6 @@
 import React from "react";
 import ArtistCard from "./ArtistCard.jsx";
+import UserInfo from "./UserInfo.jsx";
 
 class ArtistCards extends React.Component {
   constructor(props) {
@@ -18,7 +19,9 @@ class ArtistCards extends React.Component {
   render() {
     this.getArtistCards();
     return (
-      <div>{this.artistCards}</div>
+      <div>
+        <div>{this.artistCards}</div>
+      </div>
     )
   }
 
