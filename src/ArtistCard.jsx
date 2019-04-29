@@ -59,6 +59,7 @@ class ArtistCard extends React.Component {
           artistId={this.artistId}
           artistName={this.state.artistName}
           artistData={this.state.artistData}
+          artistImg={this.state.artistImg}
         />
       );
       return (

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Spotify from "spotify-web-api-js";
 import ArtistCards from "./ArtistCards.jsx";
 import Search from "./Search.jsx";
-// import { Input, InputGroup, Form } from "reactstrap";
+import UserInfo from "./UserInfo.jsx";
+import "./App.css";
 
 class App extends Component {
   constructor(props) {
@@ -74,10 +75,15 @@ class App extends Component {
             spotifyClient={this.spotifyClient}
             passSearchResults={this.getSearchResults}
           />
-          <ArtistCards
-            Spotify={this.spotifyClient}
-            artists={this.state.artists}
-          />
+          <div className="userInfo">
+            <UserInfo Spotify={this.spotifyClient} />
+          </div>
+          <div className="artistCards">
+            <ArtistCards
+              Spotify={this.spotifyClient}
+              artists={this.state.artists}
+            />
+          </div>
         </div>
       );
     }

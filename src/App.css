@@ -31,3 +31,11 @@
     transform: rotate(360deg);
   }
 }
+
+.userInfo {
+  top: 50px;
+}
+
+.artistCards {
+  top: 100px;
+}
