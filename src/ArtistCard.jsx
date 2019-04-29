@@ -1,16 +1,6 @@
 import React from "react";
 import ArtistInfo from "./ArtistInfo.jsx";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
-  ListGroup,
-  ListGroupItem
-} from "reactstrap";
+import { Card, CardImg, CardBody, ListGroup, ListGroupItem } from "reactstrap";
 
 class ArtistCard extends React.Component {
   constructor(props) {
@@ -28,7 +18,7 @@ class ArtistCard extends React.Component {
   }
 
   playSong = async trackId => {
-    if (this.state.currentTrackId != trackId) {
+    if (this.state.currentTrackId !== trackId) {
       await this.Client.play({
         uris: [`spotify:track:${trackId}`]
       });
@@ -62,7 +52,7 @@ class ArtistCard extends React.Component {
   };
 
   render() {
-    if (this.state.topTrackNames.length > 0 || this.state.artistData != null) {
+    if (this.state.topTrackNames.length > 0 && this.state.artistData != null) {
       this.artistInfo = (
         <ArtistInfo
           Spotify={this.Client}

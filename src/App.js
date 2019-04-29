@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import Spotify from "spotify-web-api-js";
-import SongCard from "./SongCard.jsx";
-import ArtistCard from "./ArtistCard.jsx";
-import * as firebase from "firebase/app";
-import "firebase/firestore";
 import ArtistCards from "./ArtistCards.jsx";
+import Search from "./Search.jsx";
+// import { Input, InputGroup, Form } from "reactstrap";
 
 class App extends Component {
   constructor(props) {
@@ -17,13 +15,23 @@ class App extends Component {
     };
   }
 
+  getSearchResults = results => {
+    if (results.length !== 0) {
+      this.setState({ artists: results });
+    } else {
+      this.getTopArtists();
+    }
+  };
+
   getTopArtists = async () => {
     const options = {
       limit: 10
     };
 
     await this.spotifyClient.getMyTopArtists(options).then(data => {
-      this.setState({ artists: data.items });
+      var artistIds = [];
+      data.items.map(artist => artistIds.push(artist.id));
+      this.setState({ artists: artistIds });
     });
   };
 
@@ -36,8 +44,6 @@ class App extends Component {
       this.spotifyClient = new Spotify();
       this.spotifyClient.setAccessToken(this.accessToken);
 
-      const { devices } = await this.spotifyClient.getMyDevices();
-      // const devices = Object.keys(devicesResp).map(key => devicesResp[key]);
       this.setState({
         authenticated: true
       });
@@ -63,10 +69,16 @@ class App extends Component {
         //   Spotify={this.spotifyClient}
         //   artistId={this.state.artists[0].id}
         // />
-        <ArtistCards
-          Spotify={this.spotifyClient}
-          artists={this.state.artists}
-        />
+        <div>
+          <Search
+            spotifyClient={this.spotifyClient}
+            passSearchResults={this.getSearchResults}
+          />
+          <ArtistCards
+            Spotify={this.spotifyClient}
+            artists={this.state.artists}
+          />
+        </div>
       );
     }
     this.getTopArtists();

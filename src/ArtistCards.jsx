@@ -8,20 +8,17 @@ class ArtistCards extends React.Component {
   }
 
   async getArtistCards() {
-    await this.props.artists.map((artist) => {this.artistCards.push(
-      <ArtistCard
-      Spotify={this.props.Spotify}
-      artistId={artist.id}/>
-    )});
+    await this.props.artists.map(artist => {
+      this.artistCards.push(
+        <ArtistCard Spotify={this.props.Spotify} artistId={artist} />
+      );
+    });
   }
 
   render() {
     this.getArtistCards();
-    return (
-      <div>{this.artistCards}</div>
-    )
+    return <div>{this.artistCards}</div>;
   }
-
 }
 
 export default ArtistCards;
