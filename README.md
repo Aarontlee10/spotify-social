@@ -1,68 +1,33 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Spotify Top Artist Visualizer
 
-## Available Scripts
+## Project Description
 
-In the project directory, you can run:
+Jeff and I created a this application which allows users to see information about their most listened to artists on Spotify. The home page is a list of the user's top 10 artists, along with playable components for each artists song. The user can see relevant information about the artist if they click on the artists name. Below is an explanation for each component.
 
-### `npm start`
+### App (stateful)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This component is the main controller which has the entire view of the application. It's state indicates whether the user is logged in, which artists to render as Artist Cards, and whether the user has submitted a search query.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Artist Card/Artist Cards (stateful)
 
-### `npm test`
+This component is the main component which contains a picture of the artist, the artist's name, and the top 5 songs on Spotify for that artist. The songs are all playable through the Spotify Client.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The App component passes in the SpotifyClient API and the Artist Id as props to this component. Artist Cards is simply a component to render several Artist Cards.
 
-### `npm run build`
+The state for this component keeps track of which song is currently playing.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Artist Info
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+This component fetches and displays the artist's information from the Spotify API, and renders that information as a Modal.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Search (stateful)
 
-### `npm run eject`
+This component renders a form at the top of the page and keeps track of the current search query, along with actually submitting the query to the API and then passing the results back to the controller (App).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## User Info
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This component renders the user's spotify information as a modal.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### NPM Packages
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+reactstrap, spotify-web-api-js
