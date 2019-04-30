@@ -24,7 +24,7 @@ This component fetches and displays the artist's information from the Spotify AP
 
 This component renders a form at the top of the page and keeps track of the current search query, along with actually submitting the query to the API and then passing the results back to the controller (App).
 
-## User Info
+### User Info
 
 This component renders the user's spotify information as a modal.
 
